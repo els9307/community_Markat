@@ -37,12 +37,11 @@
 		var emailCheck = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 		//이메일 유효성
 		$("#idChk").click(function(){
-				alert("click");
 				$.ajax({
 					type : "post",
 					url : "idChk",
 					dataType : "json",
-					data : {"U_ID" : $("#user_id").val()},
+					data : {"user_id" : $("#user_id").val()},
 					success : function(data){
 						if(data == 1){
 							alert("중복된 아이디 입니다.");
@@ -54,14 +53,13 @@
 		})
 
 		
-		$("#login").click(function(){
+		$("#Join_Btn").click(function(){
 			if($("#user_id").val() == ""){
 				alert("아이디를 입력해주세요");
 				return false;
 			}
 			if($("#user_name").val() ==""){
 				alert("이름을 입력하세요");
-				alert()
 				return false;
 			}
 			if(!emailCheck.test($("#user_email").val())){
@@ -70,6 +68,10 @@
 			}
 			if($("#user_pwd").val() == ""){
 				alert("비밀번호를 입력해 주세요");
+				return false;
+			}
+			if($("#user_nickname").val() == ""){
+				alert("사용하실 닉네임을 입력해 주세요");
 				return false;
 			}
    			if($("#user_pwd_check").val() == ""){
@@ -98,10 +100,10 @@
                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
               </div>
               
-              <form action="Join_Post" method="POST" id="frmJoin" > 
+              <form action="User_Join" method="POST" id="frmJoin" > 
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="user_id" name="U_ID" placeholder="ID" >
+                    <input type="text" class="form-control form-control-user" id="user_id" name="user_id" placeholder="ID" >
                   </div>
                   <div class="col-sm-6">
 				  	<a href="#" class="btn btn-google btn-user btn-block" id="idChk">
@@ -110,22 +112,25 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-user" id="user_name" name="U_NAME" placeholder="NAME">
+                  <input type="text" class="form-control form-control-user" id="user_name" name="user_name" placeholder="NAME">
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-user" id="user_email" name="U_EMAIL" placeholder="EMAIL" >
+                  <input type="email" class="form-control form-control-user" id="user_email" name="user_email" placeholder="EMAIL" >
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control form-control-user" id="user_nickname" name="user_nickname" placeholder="NICKNAME" >
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="password" class="form-control form-control-user" id="user_pwd" name="U_PWD" placeholder="Password">
+                    <input type="password" class="form-control form-control-user" id="user_pwd" name="user_pwd" placeholder="Password">
                   </div>
                   <div class="col-sm-6">
-                    <input type="password" class="form-control form-control-user" id="user_pwd_check" name="U_PWD_CHECK" placeholder="Repeat Password">
+                    <input type="password" class="form-control form-control-user" id="user_pwd_check" name="user_pwd_check" placeholder="Repeat Password">
                   </div>
                 </div>
               </form>
               
-                <a href="#" id="login" class="btn btn-primary btn-user btn-block">
+                <a href="#" id="Join_Btn" class="btn btn-primary btn-user btn-block">
                   Register Account
                 </a>
                 <hr>

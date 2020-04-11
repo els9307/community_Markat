@@ -6,7 +6,17 @@
 .circle-img{display: inline-block;}
 .login-join{display: inline-block;}
 </Style>
+<script>
+$(document).ready(function(){
+		$("#myPage_Btn").click(function(){
+			$("#frmInformation").submit();
+		})
+	})
+</script>
 	<!-- Sidebar -->
+<form action="myPage" method="post" id="frmInformation">
+	<input type="hidden" name="user_id" value="${session_id }">
+</form>
 					<div id="sidebar">
 						<div class="inner">
 
@@ -18,14 +28,21 @@
 									<!-- 로그인부분 -->
 									<div class="circle-img" style="text-align: left; width: 60px; height: 60px;">
 										<img class="circle" src="https://source.unsplash.com/random/60x60">
+										${session_id }
 									</div>
 									<div class="login-join" style="text-align: right;">
-										        
-	      
-	               
-	         
-										<a href="C_Login">로그인</a>
-										<a href="C_Join">회원가입</a>
+										<c:if test="${session_id !=null}">
+											<a href="Logout">로그아웃</a>
+
+												
+												<a href="#" id="myPage_Btn">내 정보</a>
+										
+										</c:if>
+										
+										<c:if test="${session_id == null}">
+											<a href="C_Login">로그인</a>
+											<a href="C_Join">회원가입</a>
+										</c:if>
 									</div>
 								</section>
 							<!-- Menu -->
@@ -117,6 +134,7 @@
 			<script src="assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
+			
 
 	</body>
 </html>

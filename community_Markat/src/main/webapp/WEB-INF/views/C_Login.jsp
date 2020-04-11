@@ -23,23 +23,12 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
 <script>
   $(document).ready(function(){
-    $("#login").click(function(){
-    	  $.ajax({
-    		  url : "idChk",
-    		  type : "post",
-    		  data : {"U_ID" :$("#ID").val()},
-    		  dateType : "json",
-    		  success : function(data){
-    			  if(data == 0){
-    				  alert("아이디가 없습니다.");
-    			  }
-    		  }
-    	  })
-    	console.log("출력");
+	  $("#login").click(function(){
+		var login_id = $("#user_id").val();
+    	console.log("로그인 아이디 = " + login_id);
     	$("#frm_login").submit();
+	  })
 
-
-    })
   })
 
 </script>
@@ -62,12 +51,12 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                   </div>
-                  <form class="user" action="Login_Post" method="POST" id="frm_login">
+                  <form class="user" action="User_Login" method="POST" id="frm_login">
                     <div class="form-group">
-                       <input type="text" class="form-control form-control-user" id="ID" name="U_ID" placeholder="ID">
+                       <input type="text" class="form-control form-control-user" id="user_id" name="user_id" placeholder="ID">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="PWD" name="U_PWD" placeholder="Password">
+                      <input type="password" class="form-control form-control-user" id="user_pwd" name="user_pwd" placeholder="Password">
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">

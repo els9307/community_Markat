@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.community.mapper.user_Mapper">
+	<select id="idChk" resultType="int">
+		SELECT COUNT(*) FROM CM_USERINFO WHERE USER_ID = #{user_id}
+	</select>
+	<insert id="UserJoin" parameterType="com.community.vo.CM_USERINFO">
+		<![CDATA[
+			INSERT INTO 
+				CM_USERINFO(
+						USER_NUM
+						,USER_ID
+						,USER_PWD
+						,USER_EMAIL
+						,REG_DATE
+						,MOD_DATE
+						,USER_IMG
+						,USER_THUMBIMG
+						,USER_NICKNAME
+						,USER_NAME
+						)VALUES(
+						CM_USERINFO_SEQ.NEXTVAL
+						,#{user_id}
+						,#{user_pwd}
+						,#{user_email}
+						,TO_CHAR(SYSDATE,'YYYY-MM-DD HH:MI:SS')
+						,TO_CHAR(SYSDATE,'YYYY-MM-DD HH:MI:SS')
+						,#{user_img}
+						,#{user_thumbimg}
+						,#{user_nickname}
+						,#{user_name})
+		]]>
+	</insert>
+	<select id="UserLogin" resultType="com.community.vo.CM_USERINFO">
+		<![CDATA[
+			SELECT 
+				 USER_NUM
+				,USER_ID
+				,USER_PWD
+				,USER_EMAIL
+				,REG_DATE
+				,MOD_DATE
+				,USER_IMG
+				,USER_THUMBIMG
+				,USER_NICKNAME
+				,USER_NAME
+			FROM CM_USERINFO
+			WHERE 1=1
+		]]>
+		<if test="user_id != '' and user_id != null">
+			AND USER_ID = #{user_id}
+		</if>
+	</select>
+	
+	<select id="UserInformation" parameterType="com.community.vo.CM_USERINFO" resultType="com.community.vo.CM_USERINFO">
+		<![CDATA[
+			SELECT 
+				 USER_NUM
+				,USER_ID
+				,USER_PWD
+				,USER_EMAIL
+				,REG_DATE
+				,MOD_DATE
+				,USER_IMG
+				,USER_THUMBIMG
+				,USER_NICKNAME
+				,USER_NAME
+			FROM CM_USERINFO
+            WHERE USER_ID = #{user_id}
+		]]>
+	</select>
+	<update id="UserUpdate" parameterType="com.community.vo.CM_USERINFO">
+		<![CDATA[
+			UPDATE CM_USERINFO
+				SET
+				USER_ID =
+				USER_PWD =
+				USER_EMAIL =
+				MOD_DATE =
+				USER_NAME =
+				USER_IMG = 
+				USER_THUMBIMG = 
+		]]>
+	</update>
+</mapper>
