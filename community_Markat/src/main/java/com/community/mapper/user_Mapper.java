@@ -1,10 +1,9 @@
 package com.community.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-
+import org.springframework.stereotype.Repository;
 import com.community.vo.CM_USERINFO;
 
-@Mapper
+@Repository("c_mapper")
 public interface user_Mapper {
 	public int idChk(CM_USERINFO userinfo);
 	
@@ -15,4 +14,7 @@ public interface user_Mapper {
 	public CM_USERINFO UserInformation(CM_USERINFO userinfo);
 	
 	public void UserUpdate(CM_USERINFO userinfo);
+
+
+	
 }

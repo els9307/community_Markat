@@ -3,14 +3,17 @@ package com.community.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.community.mapper.Board_Mapper;
 import com.community.mapper.user_Mapper;
+import com.community.vo.CM_BOARD;
 import com.community.vo.CM_USERINFO;
 
-@Service
+@Service("c_service")
 public class CM_Service {
 
 	@Autowired
 	public user_Mapper c_mapper;
+	
 	
 	
 	public int idChk(CM_USERINFO userinfo) {
@@ -29,5 +32,7 @@ public class CM_Service {
 	public void UserUpdate(CM_USERINFO userinfo) {
 		c_mapper.UserUpdate(userinfo);
 	}
+	
+
 	
 }

@@ -1,11 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
-	$(document).ready(function(){
-		$("#UserUpdate_Btn").click(function(){
-			$("#frmUserUpdate").submit();
-		})
+$(document).ready(function(){
+
+	$("#UserUpdate_Btn").click(function(){
+		var passWord = $("#user_pwd").val();
+		if(passWord != "" && passWord != null){
+			$("#check").val("Y");
+		}else{
+			$("#check").val("N");
+		}
+		$("#frmUserUpdate").submit();
 	})
+	$("#gdsImg").change(function(){
+ 		if(this.files && this.files[0]) {
+  			var reader = new FileReader;
+  			reader.onload = function(data) {
+   			$(".select_img img").attr("src", data.target.result).width(300);        
+  			}
+  			reader.readAsDataURL(this.files[0]);
+ 		}
+	});
+
+})
+
 </script>
 				<!-- Main -->
 					<div id="main">
@@ -22,50 +40,51 @@
 										<li><a href="#" class="icon fa-medium"><span class="label">Medium</span></a></li>
 									</ul>
 								</header>
-								
-												<!-- Form -->
-													<h3>회원정보 수정</h3>
-
-													<form method="post" action="UserUpdate" id="frmUserUpdate">
-														<div class="row uniform">
-															<div class="6u 12u$(xsmall)">
-																<h3>아이디</h3>
-																<input type="text" name="demo-name" id="demo-name" value="${USER.user_id }" placeholder="Name" />
-															</div>
-															<div class="mini-posts">
-																<article>
-																	<div class="circle-img" style="text-align: left; width: 60px; height: 60px;">
-																		<img src="images/pic07.jpg" alt="" />
-																		<input type="file">
-																	</div>
-																</article>
-															</div>
-															<div class="6u$ 12u$(xsmall)">
-																<h3>이메일</h3>
-																<input type="email" name="demo-email" id="demo-email" value="${USER.user_email }" placeholder="Email" />
-															</div>
-															<div class="6u 12u$(xsmall)">
-																<h3>이름</h3>
-																<input type="text" name="demo-name" id="demo-name" value="${USER.user_name }" placeholder="Name" />
-															</div>
-															<div class="6u$ 12u$(xsmall)">
-																<h3>닉네임</h3>
-																<input type="email" name="demo-email" id="demo-email" value="${USER.user_nickname }" placeholder="Email" />
-															</div>
-															<div class="6u 12u$(xsmall)">
-																<h3>비밀번호</h3>
-																<input type="password" name="demo-name" id="demo-name" value="" placeholder="password" />
-																<input type="password" name="demo-name" id="demo-name" value="" placeholder="password_Check" />
-															</div>
-															<!-- Break -->
-															<div class="12u$">
-																<ul class="actions">
-																	<li><input type="submit" value="정보수정하기" id="UserUpdate_Btn" class="special" /></li>
-																	<li><input type="reset" value="회원탈퇴" /></li>
-																</ul>
-															</div>
-														</div>
-													</form>
+								<!-- Form -->
+									<h3>회원정보 수정</h3>
+									<form method="post" action="UserUpdate" id="frmUserUpdate" enctype="multipart/form-data">
+									<input type="hidden" id="check" name="check">
+										<div class="row uniform">
+											<div class="6u 12u$(xsmall)">
+												<h3>아이디</h3>
+												<input type="text" name="user_id" id="user_id" value="${USER.user_id }" placeholder="Name" readonly="readonly"/>
+											</div>
+											<div class="mini-posts">
+												<label for="gdsImg">이미지</label>
+												 <div class="select_img"><img src="${pageContext.request.contextPath}${USER.user_thumbimg }" /></div>
+												<input type="file" id="gdsImg" name="file" />
+											<%-- 	<%=request.getRealPath("/") %> --%>
+											</div>
+											<div class="6u$ 12u$(xsmall)">
+												<h3>이메일</h3>
+												<input type="email" name="user_email" id="user_email" value="${USER.user_email }" placeholder="Email" />
+											</div>
+											<div class="6u 12u$(xsmall)">
+												<h3>이름</h3>
+												<input type="text" name="user_name" id="user_name" value="${USER.user_name }" placeholder="Name" />
+											</div>
+											<div class="6u$ 12u$(xsmall)">
+												<h3>닉네임</h3>
+												<input type="text" name="user_nickname" id="user_nickname" value="${USER.user_nickname }" placeholder="Email" />
+											</div>
+											
+											<div class="6u 12u$(xsmall)">
+												<h3>비밀번호</h3>
+												<input type="password" name="user_pwd" id="user_pwd" value="" placeholder="password" />
+												<input type="password" name="user_pwd_check" id="user_pwd_check" value="" placeholder="password_Check" />
+											</div>
+											<!-- Break -->
+											<div class="12u$">
+												<ul class="actions">
+													<li><input type="button" value="정보수정하기" id="UserUpdate_Btn" class="special" /></li>
+													<li><input type="reset" value="회원탈퇴" /></li>
+												</ul>
+											</div>
+										</div>
+									</form>
+									
+									
 	</div>
 </div>
+
 

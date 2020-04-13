@@ -1,12 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<script>
+function page(pageNum,word){
+	$.ajax({
+		type : "post",
+		url : "tableList",
+		data : {"word" : $("#word").val(),
+				"pageNum" : pageNum},
+		success : function(data){
+			$("#TableList_CB").html(data);
+		}
+	})
+}
+
+ 	$(document).ready(function(){
+		$.ajax({
+			type : "post",
+			url : "tableList",
+			success : function(data){
+				$("#TableList_CB").html(data);
+			}
+		})
+		
+		$("#search").click(function(){
+			$.ajax({
+				type : "post",
+				url : "tableList",
+				data : {"word" : $("#word").val()},
+				success : function(data){
+					$("#TableList_CB").html(data);
+				}
+			})
+		})
+	}) 
+</script>
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
 
 							<!-- Header -->
 								<header id="header">
-									<a href="index.html" class="logo"><strong>TABLE LIST</strong>리스트</a>
+									<a href="index.html" class="logo"><strong>게시판</strong></a>
 									<ul class="icons">
 										<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 										<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
@@ -16,54 +51,17 @@
 									</ul>
 								</header>
 												<!-- Table -->
-													<h3>Table</h3>
-
-													<h4>Default</h4>
 													<div class="table-wrapper">
-														<table>
-															<thead>
-																<tr>
-																	<th>Name</th>
-																	<th>Description</th>
-																	<th>Price</th>
-																</tr>
-															</thead>
-															<tbody>
-																<tr>
-																	<td>Item1</td>
-																	<td>Ante turpis integer aliquet porttitor.</td>
-																	<td>29.99</td>
-																</tr>
-																<tr>
-																	<td>Item2</td>
-																	<td>Vis ac commodo adipiscing arcu aliquet.</td>
-																	<td>19.99</td>
-																</tr>
-																<tr>
-																	<td>Item3</td>
-																	<td> Morbi faucibus arcu accumsan lorem.</td>
-																	<td>29.99</td>
-																</tr>
-																<tr>
-																	<td>Item4</td>
-																	<td>Vitae integer tempus condimentum.</td>
-																	<td>19.99</td>
-																</tr>
-																<tr>
-																	<td>Item5</td>
-																	<td>Ante turpis integer aliquet porttitor.</td>
-																	<td>29.99</td>
-																</tr>
-															</tbody>
-															<tfoot>
-																<tr>
-																	<td colspan="2"></td>
-																	<td>100.00</td>
-																</tr>
-															</tfoot>
-														</table>
+														<div id="TableList_CB"></div>
 													</div>
-
+											
+													<div style="text-align: right;">
+														<input type="text" id="word" name="word" style="width: 15%;height:30%; display: inline;">
+														<input type="button" id="search" class="button special small" value="검색" >
+													</div>
+													<div style="text-align: right;">
+														<a href="tableInsert" class="button small"  >글쓰기</a>
+													</div>
 
 
 

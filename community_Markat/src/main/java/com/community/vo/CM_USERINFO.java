@@ -11,6 +11,7 @@ public class CM_USERINFO {
 	private String user_thumbimg;
 	private String user_nickname;
 	private String user_name;
+	private String check;
 	public String getUser_num() {
 		return user_num == null ? "" : user_num.trim();
 	}
@@ -40,6 +41,9 @@ public class CM_USERINFO {
 	}
 	public String getUser_name() {
 		return user_name == null ? "" : user_name.trim();
+	}
+	public String getCheck() {
+		return check == null ? "" : check.trim();
 	}
 	public void setUser_num(String user_num) {
 		this.user_num = user_num;
@@ -71,4 +75,8 @@ public class CM_USERINFO {
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
 	}
+	public void setCheck(String check) {
+		this.check = check;
+	}
+	
 }
